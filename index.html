@@ -1,1 +1,1122 @@
-<!DOCTYPE html><html><head><meta http-equiv="refresh" content="0; url=/landing/"></head></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StillSaid — The moments that mattered, in their words</title>
+<meta name="description" content="Turn years of messages into a curated, source-backed keepsake of the moments that mattered — their phrases, their humor, the way they signed off.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8XJDJZPSYP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8XJDJZPSYP');
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f7f3ee;
+    --parchment: #efe9df;
+    --ink: #1c1713;
+    --ink-soft: #3d3530;
+    --ink-muted: #7a6f67;
+    --gold: #b5894a;
+    --gold-light: #d4ac72;
+    --divider: #ddd5c9;
+    --card-bg: #faf7f3;
+    --card-border: #e4dcd3;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background-color: var(--cream);
+    color: var(--ink);
+    font-size: 18px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 48px;
+    background: rgba(247,243,238,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s;
+  }
+  nav.scrolled { border-bottom-color: var(--divider); }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .nav-cta {
+    font-family: 'Source Serif 4', serif;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px solid var(--gold-light);
+    padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .nav-cta:hover { color: var(--ink); border-color: var(--ink); }
+
+  /* ─── SECTIONS ─── */
+  section { padding: 100px 0; }
+
+  .container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  .container-wide {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ─── HERO ─── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 140px 0 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 30%, rgba(181,137,74,0.06) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 10% 80%, rgba(181,137,74,0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  .hero-text { position: relative; }
+
+  .hero-eyebrow {
+    font-family: 'Source Serif 4', serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+    opacity: 0;
+    transform: translateY(12px);
+    animation: fadeUp 0.7s 0.1s ease forwards;
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(40px, 5vw, 62px);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 28px;
+    opacity: 0;
+    transform: translateY(16px);
+    animation: fadeUp 0.8s 0.2s ease forwards;
+  }
+
+  .hero-sub {
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--ink-soft);
+    line-height: 1.7;
+    margin-bottom: 44px;
+    opacity: 0;
+    transform: translateY(16px);
+    animation: fadeUp 0.8s 0.35s ease forwards;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.5s ease forwards;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    font-family: 'Source Serif 4', serif;
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--cream);
+    background: var(--ink);
+    padding: 16px 36px;
+    text-decoration: none;
+    border: 1px solid var(--ink);
+    transition: background 0.25s, color 0.25s;
+    width: fit-content;
+  }
+  .btn-primary:hover { background: var(--ink-soft); }
+
+  .hero-trust {
+    font-size: 13px;
+    color: var(--ink-muted);
+    font-style: italic;
+    line-height: 1.6;
+  }
+
+  /* ─── ARTIFACT CARD ─── */
+  .artifact-card-wrap {
+    opacity: 0;
+    transform: translateY(20px) rotate(0.5deg);
+    animation: fadeUp 1s 0.5s ease forwards;
+  }
+
+  .artifact-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    padding: 40px 44px;
+    position: relative;
+    box-shadow: 0 4px 32px rgba(28,23,19,0.08), 0 1px 0 rgba(181,137,74,0.15);
+  }
+
+  .artifact-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light), transparent);
+  }
+
+  .artifact-card-label {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    font-weight: 400;
+  }
+
+  .moment-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.25;
+  }
+
+  .moment-context {
+    font-size: 13px;
+    color: var(--ink-muted);
+    font-style: normal;
+    margin-bottom: 28px;
+    line-height: 1.6;
+  }
+
+  .moment-divider {
+    height: 1px;
+    background: var(--divider);
+    margin-bottom: 24px;
+  }
+
+  .moment-source-label {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 12px;
+  }
+
+  .moment-source {
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.65;
+    padding-left: 16px;
+    border-left: 2px solid var(--gold-light);
+  }
+
+  .moment-source .name {
+    color: var(--gold);
+    font-style: normal;
+  }
+
+  .artifact-card + .artifact-card-secondary {
+    margin-top: 16px;
+    transform: rotate(-0.8deg);
+  }
+
+  .artifact-card-secondary {
+    background: var(--parchment);
+    border: 1px solid var(--card-border);
+    padding: 28px 32px;
+    opacity: 0.65;
+  }
+
+  /* ─── SECTION TYPOGRAPHY ─── */
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(30px, 4vw, 46px);
+    font-weight: 400;
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 28px;
+  }
+
+  h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  p {
+    color: var(--ink-soft);
+    font-weight: 300;
+    line-height: 1.75;
+  }
+
+  p + p { margin-top: 20px; }
+
+  /* ─── DIVIDER ─── */
+  .rule {
+    width: 48px;
+    height: 1px;
+    background: var(--gold);
+    margin: 40px 0;
+  }
+
+  /* ─── PROBLEM SECTION ─── */
+  #problem { background: var(--ink); }
+
+  #problem .section-label { color: var(--gold-light); }
+
+  #problem h2 {
+    color: var(--cream);
+    max-width: 600px;
+    margin-bottom: 36px;
+  }
+
+  #problem p { color: rgba(247,243,238,0.7); }
+
+  #problem .rule { background: var(--gold-light); }
+
+  /* ─── HOW IT WORKS ─── */
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    margin-top: 56px;
+  }
+
+  .step {
+    position: relative;
+    padding-top: 24px;
+  }
+
+  .step::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--gold);
+    margin-bottom: 24px;
+  }
+
+  .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .step h3 { font-size: 20px; margin-bottom: 10px; }
+  .step p { font-size: 15px; }
+
+  /* ─── SAMPLE ─── */
+  #sample { background: var(--parchment); }
+
+  .sample-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 56px;
+  }
+
+  .sample-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    padding: 36px;
+    position: relative;
+  }
+
+  .sample-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+
+  .sample-card .moment-title { font-size: 22px; margin-bottom: 6px; }
+  .sample-card .moment-context { font-size: 12px; margin-bottom: 20px; }
+  .sample-card .moment-source { font-size: 13px; }
+
+  .sample-note {
+    margin-top: 36px;
+    font-size: 14px;
+    color: var(--ink-muted);
+    font-style: italic;
+    text-align: center;
+  }
+
+  /* ─── DIFFERENT ─── */
+  .comparison-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2px;
+    margin-top: 56px;
+    background: var(--divider);
+  }
+
+  .comparison-block {
+    background: var(--cream);
+    padding: 40px 44px;
+  }
+
+  .comparison-not {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .comparison-block h3 { font-size: 21px; margin-bottom: 12px; }
+  .comparison-block p { font-size: 15px; }
+
+  /* ─── LENSES ─── */
+  .lens-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin-top: 56px;
+    border: 1px solid var(--divider);
+  }
+
+  .lens-item {
+    padding: 32px 40px;
+    border-bottom: 1px solid var(--divider);
+    border-right: 1px solid var(--divider);
+  }
+
+  .lens-item:nth-child(even) { border-right: none; }
+  .lens-item:nth-last-child(-n+2) { border-bottom: none; }
+
+  .lens-icon {
+    width: 24px;
+    height: 1px;
+    background: var(--gold);
+    margin-bottom: 18px;
+  }
+
+  .lens-item h3 { font-size: 20px; margin-bottom: 8px; }
+  .lens-item p { font-size: 14px; }
+
+  /* ─── TRUST ─── */
+  #trust { background: var(--ink); }
+  #trust h2 { color: var(--cream); }
+  #trust .section-label { color: var(--gold-light); }
+  #trust .rule { background: var(--gold-light); opacity: 0.5; }
+
+  .trust-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-top: 48px;
+    background: rgba(255,255,255,0.06);
+  }
+
+  .trust-item {
+    background: rgba(255,255,255,0.04);
+    padding: 36px 40px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .trust-check {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    border: 1px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3px;
+  }
+
+  .trust-check::after {
+    content: '✓';
+    font-size: 11px;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .trust-item-text h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--cream);
+    margin-bottom: 6px;
+  }
+
+  .trust-item-text p {
+    font-size: 14px;
+    color: rgba(247,243,238,0.55);
+    line-height: 1.6;
+  }
+
+  /* ─── PILOT ─── */
+  .pilot-steps {
+    margin-top: 56px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid var(--divider);
+  }
+
+  .pilot-step {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    border-bottom: 1px solid var(--divider);
+  }
+
+  .pilot-step:last-child { border-bottom: none; }
+
+  .pilot-step-num {
+    padding: 28px 24px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    border-right: 1px solid var(--divider);
+  }
+
+  .pilot-step-num span {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .pilot-step-body {
+    padding: 28px 36px;
+  }
+
+  .pilot-step-body h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .pilot-step-body p { font-size: 15px; }
+
+  /* ─── FAQ ─── */
+  #faq { background: var(--parchment); }
+
+  .faq-list {
+    margin-top: 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid var(--card-border);
+  }
+
+  .faq-item {
+    padding: 32px 40px;
+    border-bottom: 1px solid var(--card-border);
+  }
+
+  .faq-item:last-child { border-bottom: none; }
+
+  .faq-question {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 21px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+
+  .faq-answer {
+    font-size: 15px;
+    color: var(--ink-soft);
+    font-weight: 300;
+    line-height: 1.75;
+    max-width: 640px;
+  }
+
+  /* ─── FOUNDER ─── */
+  #founder { background: var(--cream); }
+
+  .founder-note {
+    max-width: 600px;
+    font-size: 19px;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--ink-soft);
+    line-height: 1.8;
+  }
+
+  .founder-sig {
+    margin-top: 36px;
+    font-size: 14px;
+    color: var(--ink-muted);
+    font-style: normal;
+    letter-spacing: 0.04em;
+  }
+
+  /* ─── CTA SECTION ─── */
+  #apply {
+    background: var(--ink);
+    padding: 100px 0;
+  }
+
+  #apply h2 {
+    color: var(--cream);
+    font-size: clamp(28px, 3.5vw, 44px);
+    max-width: 560px;
+    margin: 0 auto 16px;
+  }
+
+  #apply .sub {
+    color: rgba(247,243,238,0.55);
+    font-size: 16px;
+    margin-bottom: 56px;
+    font-style: italic;
+  }
+
+  /* ─── CTA NOTE ─── */
+  .form-note {
+    font-size: 13px;
+    color: rgba(247,243,238,0.35);
+    font-style: italic;
+    text-align: center;
+    margin-top: 20px;
+    line-height: 1.6;
+  }
+
+  /* Legacy — kept for reference */
+  .form-success {
+    display: none;
+    text-align: center;
+    padding: 60px 0;
+  }
+
+  .form-success h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 16px;
+  }
+
+  .form-success p {
+    color: rgba(247,243,238,0.55);
+    font-size: 16px;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 40px 0;
+    border-top: 1px solid var(--divider);
+    text-align: center;
+  }
+
+  footer p {
+    font-size: 13px;
+    color: var(--ink-muted);
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0) rotate(0.5deg); }
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .fade-in-delay-1 { transition-delay: 0.1s; }
+  .fade-in-delay-2 { transition-delay: 0.2s; }
+  .fade-in-delay-3 { transition-delay: 0.3s; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 860px) {
+    .hero-inner {
+      grid-template-columns: 1fr;
+      gap: 56px;
+      padding: 0 24px;
+    }
+
+    .artifact-card-wrap { order: -1; }
+
+    .steps, .sample-grid, .comparison-grid,
+    .lens-grid, .trust-grid, .intake-form {
+      grid-template-columns: 1fr;
+    }
+
+    .comparison-block, .lens-item { border-right: none; }
+    .lens-item { border-right: none !important; }
+    .lens-item:nth-last-child(-n+2) { border-bottom: 1px solid var(--divider); }
+    .lens-item:last-child { border-bottom: none; }
+
+    nav { padding: 18px 24px; }
+
+    section { padding: 72px 0; }
+  }
+
+  @media (max-width: 560px) {
+    h1 { font-size: 36px; }
+    h2 { font-size: 28px; }
+    .pilot-step { grid-template-columns: 56px 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <a href="#" class="nav-logo">StillSaid</a>
+  <a href="/intake.html" class="nav-cta">Start your intake</a>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <span class="hero-eyebrow">Early access — 2026</span>
+      <h1>For the messages<br>that deserve more than a scroll</h1>
+      <p class="hero-sub">
+        You have years of messages with someone who matters to you. StillSaid turns them into a keepsake of the things they actually said — their phrases, humor, and sign-offs. Curated by meaning, not by date.
+      </p>
+      <div class="hero-actions">
+        <a href="/intake.html" class="btn-primary">Start your intake</a>
+        <p class="hero-trust">A private keepsake file, yours to keep — source-backed, in their exact words, no login required.</p>
+      </div>
+    </div>
+
+    <div class="artifact-card-wrap">
+      <div class="artifact-card">
+        <div class="artifact-card-label">Curated moment · Warmth &amp; humor</div>
+        <div class="moment-title">Ptoud Grand Maa</div>
+        <div class="moment-context">She was trying to type "proud." The joy came through anyway.</div>
+        <div class="moment-divider"></div>
+        <div class="moment-source-label">Original messages</div>
+        <div class="moment-source">
+          <span class="name">Mom</span><br>
+          Convratulations going to be nanimaa on few months<br>
+          U know what i am talking about<br>
+          Ptoud grand maa<br>
+          I am happy for u all
+        </div>
+      </div>
+      <div class="artifact-card artifact-card-secondary">
+        <div class="artifact-card-label">Curated moment · Recurring pattern</div>
+        <div class="moment-title">Love to all of you</div>
+        <div class="moment-context">How she signed off — the same way, every time, for years.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROBLEM ─── -->
+<section id="problem">
+  <div class="container fade-in">
+    <span class="section-label">The problem</span>
+    <h2>4,000 messages still feels like a wall</h2>
+    <div class="rule"></div>
+    <p>Years of messages become one flat archive — too meaningful to delete, too overwhelming to revisit. A forwarded meme sits beside a moment that mattered, and the format cannot tell the difference.</p>
+    <p>Most people do not go back. They keep the archive because deleting feels wrong, and they leave it there.</p>
+  </div>
+</section>
+
+<!-- ─── HOW IT WORKS ─── -->
+<section id="how">
+  <div class="container-wide">
+    <div class="container fade-in">
+      <span class="section-label">What StillSaid does</span>
+      <h2>We turn your messages into something worth keeping</h2>
+    </div>
+    <div class="steps">
+      <div class="step fade-in fade-in-delay-1">
+        <span class="step-num">Step one</span>
+        <h3>You share context</h3>
+        <p>Tell us about the conversation — who's in it, how they spoke, what languages they mixed, what you most want preserved, and what you would like us to avoid.</p>
+      </div>
+      <div class="step fade-in fade-in-delay-2">
+        <span class="step-num">Step two</span>
+        <h3>We curate the archive</h3>
+        <p>We run your messages through purpose-built curation lenses — recurring patterns, warmth and humor, hidden gems, and the shifts that marked the relationship.</p>
+      </div>
+      <div class="step fade-in fade-in-delay-3">
+        <span class="step-num">Step three</span>
+        <h3>You review what gets kept</h3>
+        <p>You review every moment before it's kept. You control what's included, how it's titled, and what stays out.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SAMPLE ─── -->
+<section id="sample">
+  <div class="container-wide">
+    <div class="container fade-in">
+      <span class="section-label">Sample output</span>
+      <h2>This is what a curated moment looks like</h2>
+      <p>Each moment includes a title, a short context line, and the original messages it came from. The messages speak for themselves.</p>
+    </div>
+
+    <div class="sample-grid">
+      <div class="sample-card fade-in fade-in-delay-1">
+        <div class="artifact-card-label">Warmth &amp; humor</div>
+        <div class="moment-title">Ptoud Grand Maa</div>
+        <div class="moment-context">She was trying to type "proud." The joy came through anyway.</div>
+        <div class="moment-divider"></div>
+        <div class="moment-source-label">Original messages</div>
+        <div class="moment-source">
+          <span class="name">Mom</span><br>
+          Convratulations going to be nanimaa on few months<br>
+          U know what i am talking about<br>
+          Ptoud grand maa<br>
+          I am happy for u all
+        </div>
+      </div>
+
+      <div class="sample-card fade-in fade-in-delay-2">
+        <div class="artifact-card-label">Recurring pattern · <span style="font-weight:600">45 conversations</span></div>
+        <div class="moment-title">Koi Nahi</div>
+        <div class="moment-context">Her version of "it's okay." Said to smooth over everything from a sore throat to a missed call.</div>
+        <div class="moment-divider"></div>
+        <div class="moment-source-label">Original exchange</div>
+        <div class="moment-source">
+          <span class="name">You</span>: Mann nahi hai baat Karne ka abhi<br>
+          <span class="name">Mom</span>: Koi nahi<br>
+          <span class="name">Mom</span>: Abhi walk keliye jaa rahi hoo
+        </div>
+      </div>
+
+      <div class="sample-card fade-in fade-in-delay-1">
+        <div class="artifact-card-label">Recurring pattern · <span style="font-weight:600">96 conversations</span></div>
+        <div class="moment-title">Theek Hai</div>
+        <div class="moment-context">Her most-used phrase. Part acknowledgment, part reassurance, part full stop.</div>
+        <div class="moment-divider"></div>
+        <div class="moment-source-label">Original exchange</div>
+        <div class="moment-source">
+          <span class="name">Mom</span>: Theek hai<br>
+          <span class="name">Mom</span>: Rest karo<br>
+          <span class="name">Mom</span>: Call karna raat ko
+        </div>
+      </div>
+
+      <div class="sample-card fade-in fade-in-delay-2">
+        <div class="artifact-card-label">Hidden gem</div>
+        <div class="moment-title">Love to all of you</div>
+        <div class="moment-context">How she signed off. The same phrase, every time, for years.</div>
+        <div class="moment-divider"></div>
+        <div class="moment-source-label">Original exchange</div>
+        <div class="moment-source">
+          <span class="name">You</span>: love you<br>
+          <span class="name">Mom</span>: Love to all of you<br>
+          <span class="name">You</span>: ❤️
+        </div>
+      </div>
+    </div>
+
+    <p class="sample-note fade-in">These are real examples drawn from one archive, shared with permission. Titles remain in the original language. Typos are preserved as written.</p>
+  </div>
+</section>
+
+<!-- ─── WHO THIS IS FOR ─── -->
+<section id="who" style="padding:80px 0;">
+  <div class="container fade-in" style="text-align:center;">
+    <span class="section-label">Who this is for</span>
+    <h2 style="max-width:600px;margin:0 auto 32px;">Who this is for</h2>
+    <p style="max-width:560px;margin:0 auto;line-height:1.8;color:var(--ink-soft);">
+      A parent still here, a partner, a sibling, a best friend — or someone you've lost. StillSaid started with loss, but the need is bigger than that. If the conversation matters, the keepsake is worth making.
+    </p>
+  </div>
+</section>
+
+<!-- ─── DIFFERENT ─── -->
+<section id="different">
+  <div class="container-wide">
+    <div class="container fade-in">
+      <span class="section-label">What makes it different</span>
+      <h2>Not a summary. Not a chatbot. Not a transcript.</h2>
+    </div>
+    <div class="comparison-grid fade-in">
+      <div class="comparison-block">
+        <span class="comparison-not">Not this</span>
+        <h3>A generic AI summary</h3>
+        <p>We do not flatten years of conversation into vague takeaways about how much someone "cared deeply." Every moment is grounded in what was actually said — curated, not narrated.</p>
+      </div>
+      <div class="comparison-block">
+        <span class="comparison-not">Not this</span>
+        <h3>A simulation or chatbot</h3>
+        <p>We do not generate new messages, recreate the person, or put words in anyone's mouth. The archive is a record of what happened, not a continuation of it.</p>
+      </div>
+      <div class="comparison-block">
+        <span class="comparison-not">Not this</span>
+        <h3>A printed export</h3>
+        <p>Raw preservation keeps everything but helps you find nothing. We surface what mattered — the patterns, phrases, and moments that would otherwise stay buried.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── WHAT WE FIND ─── -->
+<section id="lenses">
+  <div class="container fade-in">
+    <span class="section-label">What the archive can recover</span>
+    <h2>More than you think is in there</h2>
+    <p>Every archive is curated through core lenses — recurring patterns, warmth and humor, hidden gems, and shifts — plus a personal lens based on what matters most to you.</p>
+  </div>
+</section>
+
+<!-- ─── TRUST ─── -->
+<section id="trust">
+  <div class="container-wide">
+    <div class="container fade-in">
+      <span class="section-label">Privacy &amp; trust</span>
+      <h2>Built for sensitive personal archives</h2>
+      <div class="rule"></div>
+      <p style="color:rgba(247,243,238,0.6)">You're uploading something irreplaceable. Here's how we handle it.</p>
+    </div>
+    <div class="trust-grid fade-in">
+      <div class="trust-item">
+        <div class="trust-check"></div>
+        <div class="trust-item-text">
+          <h4>Never used to train any model</h4>
+          <p>Your archive is not used to improve any AI system — ours or anyone else's. Non-negotiable. Ever.</p>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-check"></div>
+        <div class="trust-item-text">
+          <h4>Never shared or sold</h4>
+          <p>Your archive and your intake responses are not shared with third parties under any circumstances.</p>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-check"></div>
+        <div class="trust-item-text">
+          <h4>Raw archive deleted after processing</h4>
+          <p>Once your curated output is ready, the original export is deleted. Only what you choose to keep is stored.</p>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-check"></div>
+        <div class="trust-item-text">
+          <h4>You control what gets surfaced</h4>
+          <p>You tell us what topics to avoid. Nothing goes into the final archive without your review and sign-off.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PILOT ─── -->
+<section id="pilot">
+  <div class="container">
+    <div class="fade-in">
+      <span class="section-label">How early access works</span>
+      <h2>A personal process, not a self-serve app</h2>
+      <p>Right now, StillSaid is working closely with a small number of people to create the first keepsakes carefully. That lets us get the output right before automating more of the workflow.</p>
+    </div>
+    <div class="pilot-steps fade-in">
+      <div class="pilot-step">
+        <div class="pilot-step-num"><span>1</span></div>
+        <div class="pilot-step-body">
+          <h4>Tell us about them</h4>
+          <p>A short intake — who this person or group is, how they communicated, what languages they mixed, the people who came up in messages, what you're hoping to find.</p>
+        </div>
+      </div>
+      <div class="pilot-step">
+        <div class="pilot-step-num"><span>2</span></div>
+        <div class="pilot-step-body">
+          <h4>Share your archive securely</h4>
+          <p>Upload your message export. We'll walk you through how. Your archive is processed privately and deleted after your keepsake is ready.</p>
+        </div>
+      </div>
+      <div class="pilot-step">
+        <div class="pilot-step-num"><span>3</span></div>
+        <div class="pilot-step-body">
+          <h4>Receive your keepsake</h4>
+          <p>We curate 25–70 moments depending on your archive — recurring phrases, warmth, hidden gems, and shifts that marked the relationship. Every moment links back to the original messages.</p>
+        </div>
+      </div>
+      <div class="pilot-step">
+        <div class="pilot-step-num"><span>4</span></div>
+        <div class="pilot-step-body">
+          <h4>Review and tell us what feels right</h4>
+          <p>You read through. Anything that doesn't belong, you remove. The final keepsake reflects what you want kept — in their words, exactly as they wrote them.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FAQ ─── -->
+<section id="faq">
+  <div class="container">
+    <div class="fade-in">
+      <span class="section-label">What people ask us</span>
+      <h2>Before you decide</h2>
+    </div>
+    <div class="faq-list fade-in">
+      <div class="faq-item">
+        <div class="faq-question">"What do I actually get back?"</div>
+        <div class="faq-answer">A password-protected keepsake file with 25–70 curated moments linked to the original messages. No app, no login. Yours to keep.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">"How long does it take?"</div>
+        <div class="faq-answer">The intake takes about five minutes. Your keepsake is typically ready within a few days.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">"What if our messages are in multiple languages?"</div>
+        <div class="faq-answer">We preserve everything exactly as written — typos, code-switching, invented words and all. We don't translate or clean up anything.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">"Can I do this for someone who's still here?"</div>
+        <div class="faq-answer">Yes. It works for any one-on-one conversation that matters to you. Group chat support is coming soon.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">"What does it cost?"</div>
+        <div class="faq-answer">Early access keepsakes are free. We're looking for people willing to share honest feedback in exchange.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">"What happens to my messages after?"</div>
+        <div class="faq-answer">Processed once, then deleted. We don't store the raw archive or train on it.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOUNDER ─── -->
+<section id="founder">
+  <div class="container fade-in">
+    <span class="section-label">Why this exists</span>
+    <div class="rule"></div>
+    <p class="founder-note">
+      I started thinking about this when I realized years of messages with my mom had become one of the most important things I owned — and one of the hardest to hold. Too meaningful to delete. Too overwhelming to revisit. StillSaid began as a way to find what was in there.
+    </p>
+    <p class="founder-note" style="margin-top:24px">
+      What came back surprised me. It is the reason I think this should exist for other people too.
+    </p>
+    <p class="founder-sig">— Priyanka Mehra, Founder</p>
+  </div>
+</section>
+
+<!-- ─── APPLY / CTA ─── -->
+<section id="apply">
+  <div class="container" style="text-align:center;">
+    <div class="fade-in">
+      <h2>If you have messages too meaningful to leave as they are</h2>
+      <p class="sub">We're starting with a small number of early access users.<br>The intake takes about five minutes.</p>
+      <a href="/intake.html" class="btn-primary" style="display:inline-block;margin-top:2rem;">Start your intake</a>
+      <p class="form-note" style="margin-top:1.5rem;">Your information is never shared. You will hear back within a few days.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <p>StillSaid &nbsp;·&nbsp; <a href="/privacy.html" style="color:var(--ink-muted);text-decoration:none;border-bottom:1px solid var(--divider);">Privacy</a> &nbsp;·&nbsp; Early access &nbsp;·&nbsp; 2026</p>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll effect
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Intersection observer for fade-ins
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // No inline form — intake lives at /intake
+</script>
+
+</body>
+</html>

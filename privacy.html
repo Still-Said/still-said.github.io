@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StillSaid — Privacy & Data Handling</title>
+<meta name="description" content="How StillSaid handles your message archives: what we collect, what we don't, and what happens to your data.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8XJDJZPSYP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8XJDJZPSYP');
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f7f3ee;
+    --parchment: #efe9df;
+    --ink: #1c1713;
+    --ink-soft: #3d3530;
+    --ink-muted: #7a6f67;
+    --gold: #b5894a;
+    --gold-light: #d4ac72;
+    --divider: #ddd5c9;
+    --card-bg: #faf7f3;
+    --card-border: #e4dcd3;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background-color: var(--cream);
+    color: var(--ink);
+    font-size: 18px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 48px;
+    background: rgba(247,243,238,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s;
+  }
+  nav.scrolled { border-bottom-color: var(--divider); }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .nav-cta {
+    font-family: 'Source Serif 4', serif;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px solid var(--gold-light);
+    padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .nav-cta:hover { color: var(--ink); border-color: var(--ink); }
+
+  /* ─── PAGE HEADER ─── */
+  .page-header {
+    padding: 160px 0 60px;
+  }
+
+  .container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  .section-label {
+    font-family: 'Source Serif 4', serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 4vw, 46px);
+    font-weight: 400;
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 20px;
+  }
+
+  .page-intro {
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--ink-soft);
+    line-height: 1.75;
+    max-width: 600px;
+  }
+
+  .rule {
+    width: 48px;
+    height: 1px;
+    background: var(--gold);
+    margin: 40px 0;
+  }
+
+  /* ─── CONTENT ─── */
+  .content-section {
+    padding: 0 0 56px;
+  }
+
+  .content-section:last-of-type {
+    padding-bottom: 80px;
+  }
+
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+
+  p {
+    color: var(--ink-soft);
+    font-weight: 300;
+    line-height: 1.75;
+  }
+
+  p + p { margin-top: 16px; }
+
+  a.inline-link {
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px solid var(--gold-light);
+    transition: color 0.2s, border-color 0.2s;
+  }
+  a.inline-link:hover { color: var(--ink); border-color: var(--ink); }
+
+  /* ─── COMMITMENT GRID ─── */
+  .commitment-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    margin: 32px 0;
+    border: 1px solid var(--card-border);
+    background: var(--card-bg);
+  }
+
+  .commitment-item {
+    padding: 28px 36px;
+    border-bottom: 1px solid var(--card-border);
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+  }
+
+  .commitment-item:last-child { border-bottom: none; }
+
+  .commitment-check {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    border: 1px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3px;
+  }
+
+  .commitment-check::after {
+    content: '\2713';
+    font-size: 11px;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .commitment-text h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .commitment-text p {
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  /* ─── SIMPLE LIST ─── */
+  .simple-list {
+    margin: 20px 0;
+    padding-left: 24px;
+  }
+
+  .simple-list li {
+    color: var(--ink-soft);
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.75;
+    margin-bottom: 6px;
+  }
+
+  /* ─── RETENTION TABLE ─── */
+  .retention-grid {
+    margin: 24px 0;
+    border: 1px solid var(--card-border);
+    background: var(--card-bg);
+  }
+
+  .retention-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid var(--card-border);
+    font-size: 15px;
+  }
+
+  .retention-row:last-child { border-bottom: none; }
+
+  .retention-label {
+    padding: 18px 24px;
+    font-weight: 400;
+    color: var(--ink);
+    border-right: 1px solid var(--card-border);
+  }
+
+  .retention-value {
+    padding: 18px 24px;
+    font-weight: 300;
+    color: var(--ink-soft);
+  }
+
+  .updated {
+    font-size: 13px;
+    color: var(--ink-muted);
+    font-style: italic;
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--divider);
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 40px 0;
+    border-top: 1px solid var(--divider);
+    text-align: center;
+  }
+
+  footer p {
+    font-size: 13px;
+    color: var(--ink-muted);
+  }
+
+  footer a {
+    color: var(--ink-muted);
+    text-decoration: none;
+    border-bottom: 1px solid var(--divider);
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  footer a:hover {
+    color: var(--ink);
+    border-color: var(--ink);
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 860px) {
+    nav { padding: 18px 24px; }
+    .page-header { padding: 120px 0 48px; }
+  }
+
+  @media (max-width: 560px) {
+    h1 { font-size: 30px; }
+    .commitment-item { padding: 22px 24px; }
+    .retention-row { grid-template-columns: 1fr; }
+    .retention-label { border-right: none; border-bottom: 1px solid var(--card-border); }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <a href="/" class="nav-logo">StillSaid</a>
+  <a href="/intake.html" class="nav-cta">Start your intake</a>
+</nav>
+
+<!-- ─── HEADER ─── -->
+<div class="page-header">
+  <div class="container">
+    <span class="section-label">Privacy &amp; data handling</span>
+    <h1>What happens to your messages</h1>
+    <p class="page-intro">You're sharing something irreplaceable. This page explains how StillSaid handles your archive, what we collect, what we do not do with your data, and how your keepsake is delivered.</p>
+  </div>
+</div>
+
+<!-- ─── CORE COMMITMENTS ─── -->
+<div class="container">
+
+  <div class="content-section">
+    <h2>Our commitments</h2>
+    <p>These are the principles the service is built around.</p>
+
+    <div class="commitment-grid">
+      <div class="commitment-item">
+        <div class="commitment-check"></div>
+        <div class="commitment-text">
+          <h3>Your archive is not used to train AI models</h3>
+          <p>Your messages are processed only to create your keepsake. We do not use your archive to train our own models, and we do not allow it to be used for model training by service providers involved in processing your keepsake.</p>
+        </div>
+      </div>
+      <div class="commitment-item">
+        <div class="commitment-check"></div>
+        <div class="commitment-text">
+          <h3>Your archive is never sold</h3>
+          <p>We do not sell your messages, your intake responses, or your keepsake. We do not share them for advertising, marketing, or data brokerage purposes.</p>
+        </div>
+      </div>
+      <div class="commitment-item">
+        <div class="commitment-check"></div>
+        <div class="commitment-text">
+          <h3>Access is limited to what is necessary</h3>
+          <p>We use a small number of trusted service providers to help us securely receive files, process archives, and deliver the final keepsake. They are used only for those operational purposes.</p>
+        </div>
+      </div>
+      <div class="commitment-item">
+        <div class="commitment-check"></div>
+        <div class="commitment-text">
+          <h3>Your raw archive is deleted after fulfillment</h3>
+          <!-- TODO: Replace timeframe with actual number once decided -->
+          <p>Once your keepsake has been delivered, your original message export is deleted from our systems within 7 days, unless you ask us to delete it sooner.</p>
+        </div>
+      </div>
+      <div class="commitment-item">
+        <div class="commitment-check"></div>
+        <div class="commitment-text">
+          <h3>You stay in control of what is included</h3>
+          <p>During intake, you can tell us what topics, people, or types of content you want excluded. You will have a chance to review the keepsake before it is finalized.</p>
+        </div>
+      </div>
+      <div class="commitment-item">
+        <div class="commitment-check"></div>
+        <div class="commitment-text">
+          <h3>Your delivered keepsake is protected</h3>
+          <p>The keepsake file you receive is password-protected, and we send the file and password separately for added security.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── WHAT WE COLLECT ─── -->
+  <div class="content-section">
+    <h2>What we collect</h2>
+    <p>To create your keepsake, we collect:</p>
+    <ul class="simple-list">
+      <li>The information you provide during intake, such as your name, email address, and context about the relationship or archive</li>
+      <li>The message export or archive you choose to upload</li>
+      <li>Any review feedback or revision notes you send during the process</li>
+    </ul>
+    <p>We collect this information only to create, review, deliver, and support your keepsake.</p>
+  </div>
+
+  <!-- ─── HOW PROCESSING WORKS ─── -->
+  <div class="content-section">
+    <h2>How processing works</h2>
+    <p>Your archive is processed using AI tools to help identify meaningful moments, recurring phrases, patterns, themes, and language that may be worth surfacing in the keepsake.</p>
+    <p>If we use third-party AI providers to process your archive, we configure those services to minimize retention and to prevent your content from being used for model training, where those controls are available.</p>
+    <p>After processing and delivery, the raw archive is deleted according to the retention window described above.</p>
+  </div>
+
+  <!-- ─── WHAT WE DON'T DO ─── -->
+  <div class="content-section">
+    <h2>What we do not do</h2>
+    <p>We do not sell your data. We do not use your archive for advertising. We do not build marketing profiles from your messages. We do not use your archive to train AI models. We do not publish, share, or reuse your archive outside the process of creating your keepsake.</p>
+    <p>We also do not require you to create an account to receive your keepsake during early access.</p>
+  </div>
+
+  <!-- ─── WEBSITE ANALYTICS ─── -->
+  <div class="content-section">
+    <h2>Website analytics</h2>
+    <p>We use basic website analytics to understand traffic to the StillSaid site — for example, how people find the site and which pages are visited.</p>
+    <p>These analytics apply to the website only. They do not access, read, or analyze your message archive or the contents of your keepsake.</p>
+  </div>
+
+  <!-- ─── KEEPSAKE DELIVERY ─── -->
+  <div class="content-section">
+    <h2>How your keepsake is delivered</h2>
+    <p>Your keepsake is delivered as a self-contained HTML file that works offline. It does not require an ongoing account or internet connection to open after delivery.</p>
+    <p>The file is password-protected, and we send the file and password separately to reduce the risk of unauthorized access.</p>
+  </div>
+
+  <!-- ─── UPLOADS ─── -->
+  <div class="content-section">
+    <h2>How uploads are secured</h2>
+    <p>During early access, uploads are handled through Proton Drive using unique upload links. Files are encrypted in transit and at rest by that service.</p>
+    <p>After your archive has been processed and your keepsake has been delivered, uploaded source files are deleted from the shared folder in line with our retention policy.</p>
+  </div>
+
+  <!-- ─── DATA RETENTION ─── -->
+  <div class="content-section">
+    <h2>Data retention</h2>
+    <p>We keep personal information only for as long as needed to provide the service, communicate with you about your keepsake, and complete delivery and support.</p>
+
+    <div class="retention-grid">
+      <div class="retention-row">
+        <div class="retention-label">Raw message archive</div>
+        <!-- TODO: Replace timeframe with actual number once decided -->
+        <div class="retention-value">Deleted within 7 days after delivery</div>
+      </div>
+      <div class="retention-row">
+        <div class="retention-label">Intake information &amp; email</div>
+        <div class="retention-value">Retained only as long as needed to support the project and respond to your requests</div>
+      </div>
+      <div class="retention-row">
+        <div class="retention-label">Final keepsake</div>
+        <div class="retention-value">Retained only if needed for delivery, revision, or support — deleted on request</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── YOUR CHOICES ─── -->
+  <div class="content-section">
+    <h2>Your choices</h2>
+    <p>You can contact us to ask questions about how your data is handled, request deletion of your archive or related information, correct information you provided during intake, or ask us not to include certain content in your keepsake.</p>
+  </div>
+
+  <!-- ─── QUESTIONS ─── -->
+  <div class="content-section">
+    <h2>Questions</h2>
+    <p>If anything on this page is unclear, or if you want to request deletion of your data, contact us at <a href="mailto:stillsaid@proton.me" class="inline-link">stillsaid@proton.me</a>.</p>
+
+    <p class="updated">Last updated: April 6, 2026</p>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <p><a href="/">StillSaid</a> &nbsp;·&nbsp; <a href="/privacy.html">Privacy</a> &nbsp;·&nbsp; Early access &nbsp;·&nbsp; 2026</p>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  });
+</script>
+
+</body>
+</html>

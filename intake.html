@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StillSaid — Start your intake</title>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8XJDJZPSYP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8XJDJZPSYP');
+</script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #faf9f7;
+    --parchment: #f0ece5;
+    --ink: #1a1917;
+    --ink-soft: #3d3530;
+    --muted: #8a857d;
+    --accent: #9a8e7f;
+    --gold: #b5894a;
+    --gold-light: #d4ac72;
+    --divider: #e2dcd4;
+    --white: #ffffff;
+    --input-border: #ddd6cc;
+    --error: #c44;
+  }
+
+  body {
+    background: var(--cream);
+    font-family: Georgia, 'Times New Roman', serif;
+    color: var(--ink);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* NAV */
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    padding: 16px 24px;
+    display: flex;
+    justify-content: center;
+    background: rgba(250,249,247,0.92);
+    backdrop-filter: blur(8px);
+    z-index: 10;
+    border-bottom: 1px solid transparent;
+  }
+
+  .nav-logo {
+    font-family: Georgia, serif;
+    font-size: 16px;
+    letter-spacing: 0.06em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  /* MAIN */
+  .main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 24px 60px;
+  }
+
+  .screen {
+    display: none;
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  .screen.active { display: block; }
+
+  /* PROGRESS DOTS */
+  .progress-dots {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 32px;
+  }
+
+  .dot {
+    height: 8px;
+    border-radius: 4px;
+    background: var(--divider);
+    transition: all 0.3s;
+  }
+
+  .dot.active { background: var(--gold); width: 24px !important; }
+  .dot.done { background: var(--gold); }
+
+  /* TYPOGRAPHY */
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+    font-family: Georgia, serif;
+  }
+
+  h1 {
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.3;
+    margin-bottom: 20px;
+    font-family: Georgia, serif;
+  }
+
+  .subtitle {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  .italic-note {
+    font-size: 13px;
+    color: var(--accent);
+    line-height: 1.6;
+    margin-bottom: 40px;
+    font-style: italic;
+  }
+
+  /* LABELS */
+  .label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .hint {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 10px;
+    line-height: 1.5;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  .field { margin-bottom: 28px; }
+
+  /* INPUTS */
+  input[type="text"], textarea {
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 15px;
+    font-family: Georgia, serif;
+    color: var(--ink);
+    background: var(--white);
+    border: 1px solid var(--input-border);
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  input[type="text"]:focus, textarea:focus {
+    border-color: var(--gold);
+  }
+
+  textarea {
+    resize: vertical;
+    line-height: 1.6;
+  }
+
+  /* CHIPS */
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .chip {
+    padding: 7px 14px;
+    font-size: 13px;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--ink-soft);
+    background: var(--parchment);
+    border: 1px solid var(--divider);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.15s;
+    user-select: none;
+  }
+
+  .chip.selected {
+    color: var(--white);
+    background: var(--ink);
+    border-color: var(--ink);
+  }
+
+  /* BUTTONS */
+  .btn-row {
+    display: flex;
+    gap: 12px;
+    justify-content: space-between;
+    margin-top: 8px;
+  }
+
+  button.btn {
+    padding: 14px 32px;
+    font-size: 14px;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid var(--ink);
+  }
+
+  button.btn-primary {
+    color: var(--cream);
+    background: var(--ink);
+  }
+
+  button.btn-primary:hover { background: var(--ink-soft); }
+
+  button.btn-secondary {
+    color: var(--ink);
+    background: transparent;
+  }
+
+  button.btn-secondary:hover { background: var(--parchment); }
+
+  button.btn:disabled {
+    opacity: 0.5;
+    cursor: default;
+    pointer-events: none;
+  }
+
+  /* INFO BOX */
+  .info-box {
+    background: var(--parchment);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: 28px;
+    font-size: 13px;
+    color: var(--accent);
+    line-height: 1.6;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  /* REVIEW */
+  .review-table {
+    background: var(--white);
+    border: 1px solid var(--divider);
+    border-radius: 8px;
+    padding: 20px 22px;
+    margin-bottom: 28px;
+  }
+
+  .review-row {
+    display: flex;
+    gap: 16px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--divider);
+  }
+
+  .review-row:last-child { border-bottom: none; }
+
+  .review-label {
+    font-size: 12px;
+    color: var(--muted);
+    width: 100px;
+    flex-shrink: 0;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    padding-top: 1px;
+  }
+
+  .review-value {
+    font-size: 14px;
+    color: var(--ink);
+    line-height: 1.5;
+    white-space: pre-line;
+  }
+
+  /* CONFIRMATION */
+  .check-icon {
+    font-size: 32px;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+
+  .confirm-title {
+    font-size: 22px;
+    font-family: Georgia, serif;
+    color: var(--ink);
+    margin-bottom: 12px;
+    line-height: 1.3;
+    text-align: center;
+  }
+
+  .confirm-sub {
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+    margin-bottom: 32px;
+    text-align: center;
+  }
+
+  .next-steps {
+    background: var(--parchment);
+    border-radius: 8px;
+    padding: 16px 20px;
+    text-align: left;
+  }
+
+  .next-steps-label {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+    font-family: -apple-system, sans-serif;
+  }
+
+  .next-steps-body {
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+  }
+
+  .contact-note {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 24px;
+    text-align: center;
+    font-family: -apple-system, sans-serif;
+  }
+
+  .contact-note a { color: var(--gold); text-decoration: none; }
+
+  /* ERROR */
+  .error-box {
+    background: #fef2f2;
+    border: 1px solid var(--error);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    color: var(--error);
+    text-align: center;
+    display: none;
+  }
+
+  /* STEP FOOTER */
+  .step-footer {
+    position: fixed;
+    bottom: 16px;
+    left: 0; right: 0;
+    text-align: center;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    font-family: -apple-system, sans-serif;
+  }
+
+  /* CENTER TEXT */
+  .text-center { text-align: center; }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="/" class="nav-logo">StillSaid</a>
+</nav>
+
+<main class="main">
+
+  <!-- WELCOME -->
+  <div class="screen active" id="screen-welcome">
+    <div class="text-center">
+      <div class="eyebrow">Let's get started</div>
+      <h1>We'll need a little context before<br>we look through the messages.</h1>
+      <p class="subtitle">This helps us find the moments that actually sound like your person — not just the ones that sound important. Everything you share here stays private and is deleted after your keepsake is generated.</p>
+      <p class="italic-note">It only takes a few minutes. Nothing here needs to be perfect.</p>
+      <button class="btn btn-primary" onclick="goTo('step1')">Begin</button>
+    </div>
+  </div>
+
+  <!-- STEP 1 -->
+  <div class="screen" id="screen-step1">
+    <div class="progress-dots" id="dots-step1"></div>
+
+    <div class="field">
+      <div class="label">Your name</div>
+      <div class="hint">So we know who to send your keepsake to.</div>
+      <input type="text" id="input-yourName" placeholder="e.g., Sara, James, Mei" oninput="updateContinue1()">
+    </div>
+
+    <div class="field">
+      <div class="label">Your email address</div>
+      <div class="hint">We'll use this to send you your keepsake. Nothing else.</div>
+      <input type="email" id="input-yourEmail" placeholder="e.g., you@gmail.com" oninput="updateContinue1()">
+    </div>
+
+    <div class="field">
+      <div class="label">Who is this person to you?</div>
+      <div class="hint">This helps us understand the relationship context.</div>
+      <div class="chips" id="chips-relationship">
+        <div class="chip" onclick="selectChip(this, 'relationship')">My mother</div>
+        <div class="chip" onclick="selectChip(this, 'relationship')">My father</div>
+        <div class="chip" onclick="selectChip(this, 'relationship')">My partner</div>
+        <div class="chip" onclick="selectChip(this, 'relationship')">My sibling</div>
+        <div class="chip" onclick="selectChip(this, 'relationship')">My grandparent</div>
+        <div class="chip" onclick="selectChip(this, 'relationship')">My best friend</div>
+        <div class="chip" onclick="selectChip(this, 'relationship')">Someone else</div>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="label">What's their name?</div>
+      <div class="hint">Their real name, or whatever feels right.</div>
+      <input type="text" id="input-personName" placeholder="e.g., Maa, Dad, Sarah" oninput="updateContinue1()">
+    </div>
+
+    <div class="field">
+      <div class="label">Are they still with you?</div>
+      <div class="hint">This helps us get the tone right throughout the keepsake.</div>
+      <div class="chips" id="chips-personStatus">
+        <div class="chip" onclick="selectChip(this, 'personStatus')">Yes, they're still here</div>
+        <div class="chip" onclick="selectChip(this, 'personStatus')">No, they've passed</div>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="label">What did you call each other?</div>
+      <div class="hint">Nicknames, pet names — whatever you used in messages with each other.</div>
+      <input type="text" id="input-nicknames" placeholder="e.g., She called me beta, I called her Maa">
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goTo('welcome')">Back</button>
+      <button class="btn btn-primary" id="btn-continue1" onclick="goTo('step2')" disabled>Continue</button>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="screen" id="screen-step2">
+    <div class="progress-dots" id="dots-step2"></div>
+
+    <div class="field">
+      <div class="label">What languages did you message in?</div>
+      <div class="hint">Select all that apply. We preserve the original language exactly — typos, code-switching, invented words and all.</div>
+      <div class="chips" id="chips-languages">
+        <div class="chip" onclick="toggleChip(this, 'languages')">English</div>
+        <div class="chip" onclick="toggleChip(this, 'languages')">Hindi</div>
+        <div class="chip" onclick="toggleChip(this, 'languages')">Hinglish</div>
+        <div class="chip" onclick="toggleChip(this, 'languages')">Spanish</div>
+        <div class="chip" onclick="toggleChip(this, 'languages')">Punjabi</div>
+        <div class="chip" onclick="toggleChip(this, 'languages')">Urdu</div>
+        <div class="chip" onclick="toggleChip(this, 'languages')">Bengali</div>
+        <div class="chip" onclick="toggleChip(this, 'languages')">Tamil</div>
+        <div class="chip" onclick="toggleChip(this, 'languages')">Telugu</div>
+        <div class="chip" onclick="toggleChip(this, 'languages')">Gujarati</div>
+        <div class="chip" onclick="toggleChip(this, 'languages')">Marathi</div>
+        <div class="chip" onclick="toggleChip(this, 'languages')">Arabic</div>
+        <div class="chip" onclick="toggleChip(this, 'languages')">Mandarin</div>
+        <div class="chip" onclick="toggleChip(this, 'languages')">Tagalog</div>
+        <div class="chip" onclick="toggleChip(this, 'languages')">Other</div>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="label">Roughly how long did you message each other?</div>
+      <div class="hint">Just rough timing — it helps us understand the archive.</div>
+      <div class="chips" id="chips-timespan">
+        <div class="chip" onclick="selectChip(this, 'timespan')">Less than a year</div>
+        <div class="chip" onclick="selectChip(this, 'timespan')">1–3 years</div>
+        <div class="chip" onclick="selectChip(this, 'timespan')">3–5 years</div>
+        <div class="chip" onclick="selectChip(this, 'timespan')">5–10 years</div>
+        <div class="chip" onclick="selectChip(this, 'timespan')">10+ years</div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goTo('step1')">Back</button>
+      <button class="btn btn-primary" id="btn-continue2" onclick="goTo('step3')" disabled>Continue</button>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="screen" id="screen-step3">
+    <div class="progress-dots" id="dots-step3"></div>
+
+    <div class="info-box">
+      Names come up a lot in messages. Knowing who's who helps us get relationships right — like whether "Arushi" is a daughter or a cousin.
+    </div>
+
+    <div class="field">
+      <div class="label">Key people in the messages</div>
+      <div class="hint">List a few people who come up often in messages. Just names and who they are — doesn't need to be everyone.</div>
+      <textarea id="input-people" rows="4" placeholder="e.g.,&#10;Arushi — my cousin&#10;Papa — my father&#10;Nani — her mother&#10;Raj — my brother"></textarea>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goTo('step2')">Back</button>
+      <button class="btn btn-primary" onclick="goTo('step4')">Continue</button>
+    </div>
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="screen" id="screen-step4">
+    <div class="progress-dots" id="dots-step4"></div>
+
+    <div class="field">
+      <div class="label">Is there anything specific you're hoping to see?</div>
+      <div class="hint">Write freely — anything you remember, anything you're hoping to find. We'll use this to guide what we surface.</div>
+      <textarea id="input-hopingToFind" rows="4" placeholder="e.g., She had a phrase she always said before hanging up... There was a recipe for dal she once described over text... I think she sent me something funny about my wedding outfit..."></textarea>
+      <div class="hint" style="margin-top:8px">Don't worry if you're not sure — that's part of why we're here. We'll also surface things you may have forgotten.</div>
+    </div>
+
+    <div class="field">
+      <div class="label">Is there anything you'd rather we skip?</div>
+      <div class="hint">Time periods, topics, or anything that feels too private or too painful. We'll skip it entirely.</div>
+      <textarea id="input-avoid" rows="3" placeholder="e.g., The last few months were very hard — I'd rather not revisit them. Or: skip anything about the hospital."></textarea>
+      <div class="hint" style="margin-top:8px">Completely optional. If you leave this blank, we'll include everything.</div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goTo('step3')">Back</button>
+      <button class="btn btn-primary" onclick="goTo('review')">Continue</button>
+    </div>
+  </div>
+
+  <!-- REVIEW -->
+  <div class="screen" id="screen-review">
+    <div class="text-center" style="margin-bottom:28px">
+      <div style="font-size:20px;font-family:Georgia,serif;color:var(--ink);margin-bottom:8px">Here's what you've shared</div>
+      <div style="font-size:13px;color:var(--muted);line-height:1.6">Take a quick look — you can always go back and change anything.</div>
+    </div>
+
+    <div class="review-table" id="review-table"></div>
+
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goTo('step1')">Edit answers</button>
+      <button class="btn btn-primary" onclick="goTo('submit')">Looks good — continue</button>
+    </div>
+  </div>
+
+  <!-- SUBMIT -->
+  <div class="screen" id="screen-submit">
+    <div class="text-center" style="margin-bottom:28px">
+      <div style="font-size:20px;font-family:Georgia,serif;color:var(--ink);margin-bottom:8px">Ready to submit</div>
+      <div style="font-size:13px;color:var(--muted);line-height:1.6">We'll review your answers and get back to you within a few days with next steps — including a secure link to share your archive.</div>
+    </div>
+
+    <div class="info-box" style="text-align:center">
+      Your archive will be processed privately and deleted once your keepsake is ready. Nothing is stored. We never train on your data.
+    </div>
+
+    <div class="error-box" id="error-box">Something went wrong. Please try again.</div>
+
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goTo('review')">Back</button>
+      <button class="btn btn-primary" id="btn-submit" onclick="submitForm()">Submit my intake</button>
+    </div>
+  </div>
+
+  <!-- CONFIRMATION -->
+  <div class="screen" id="screen-confirmation">
+    <div class="check-icon">✓</div>
+    <div class="confirm-title" id="confirm-title">Thank you.</div>
+    <div class="confirm-sub">We'll be in touch within a few days. The next step will be sharing your message archive through a secure link we send you — nothing is uploaded until then.</div>
+    <div class="next-steps">
+      <div class="next-steps-label">What happens next</div>
+      <div class="next-steps-body">
+        1. We review your intake answers<br>
+        2. We send you a secure link to upload your archive<br>
+        3. We curate the moments and send you a draft keepsake<br>
+        4. You review, edit, and decide what stays
+      </div>
+    </div>
+    <div class="contact-note">Questions? Reach us at <a href="mailto:hello@stillsaid.com">hello@stillsaid.com</a></div>
+  </div>
+
+</main>
+
+<div class="step-footer" id="step-footer"></div>
+
+<script>
+  // ── STATE ──
+  const state = {
+    yourName: '',
+    yourEmail: '',
+    relationship: '',
+    personName: '',
+    personStatus: '',
+    nicknames: '',
+    languages: [],
+    timespan: '',
+    people: '',
+    hopingToFind: '',
+    avoid: '',
+  };
+
+  // ── NAVIGATION ──
+  function goTo(screenName) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById('screen-' + screenName).classList.add('active');
+    updateFooter(screenName);
+    if (screenName === 'review') buildReview();
+    if (screenName.startsWith('step')) renderDots(screenName);
+    window.scrollTo(0, 0);
+  }
+
+  // ── PROGRESS DOTS ──
+  function renderDots(screenName) {
+    const stepNum = parseInt(screenName.replace('step', '')) - 1;
+    const containers = ['dots-step1','dots-step2','dots-step3','dots-step4'];
+    containers.forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.innerHTML = '';
+      for (let i = 0; i < 4; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'dot';
+        dot.style.width = '8px';
+        if (i < stepNum) dot.classList.add('done');
+        if (i === stepNum) dot.classList.add('active');
+        el.appendChild(dot);
+      }
+    });
+  }
+
+  // ── FOOTER ──
+  function updateFooter(screen) {
+    const footer = document.getElementById('step-footer');
+    const map = { step1: 'Step 1 of 4', step2: 'Step 2 of 4', step3: 'Step 3 of 4', step4: 'Step 4 of 4', review: 'Review your answers', submit: 'Submit' };
+    footer.textContent = map[screen] || '';
+  }
+
+  // ── CHIP SELECTION (single) ──
+  function selectChip(el, field) {
+    const parent = el.parentElement;
+    parent.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    state[field] = el.textContent.trim();
+    if (field === 'relationship' || field === 'personStatus') updateContinue1();
+    if (field === 'timespan') updateContinue2();
+  }
+
+  // ── CHIP TOGGLE (multi) ──
+  function toggleChip(el, field) {
+    el.classList.toggle('selected');
+    const selected = [...document.querySelectorAll('#chips-' + field + ' .chip.selected')].map(c => c.textContent.trim());
+    state[field] = selected;
+    if (field === 'languages') updateContinue2();
+  }
+
+  // ── CONTINUE VALIDATORS ──
+  function updateContinue1() {
+    state.yourName = document.getElementById('input-yourName').value.trim();
+    state.yourEmail = document.getElementById('input-yourEmail').value.trim();
+    state.personName = document.getElementById('input-personName').value.trim();
+    const emailValid = state.yourEmail.includes('@') && state.yourEmail.includes('.');
+    const ok = state.yourName && emailValid && state.relationship && state.personName && state.personStatus;
+    document.getElementById('btn-continue1').disabled = !ok;
+  }
+
+  function updateContinue2() {
+    const ok = state.languages.length > 0;
+    document.getElementById('btn-continue2').disabled = !ok;
+  }
+
+  // ── SAVE TEXT INPUTS BEFORE LEAVING ──
+  document.getElementById('input-personName').addEventListener('input', updateContinue1);
+  document.getElementById('input-nicknames').addEventListener('input', () => { state.nicknames = document.getElementById('input-nicknames').value; });
+  document.getElementById('input-people').addEventListener('input', () => { state.people = document.getElementById('input-people').value; });
+  document.getElementById('input-hopingToFind').addEventListener('input', () => { state.hopingToFind = document.getElementById('input-hopingToFind').value; });
+  document.getElementById('input-avoid').addEventListener('input', () => { state.avoid = document.getElementById('input-avoid').value; });
+
+  // ── BUILD REVIEW ──
+  function buildReview() {
+    const items = [
+      { label: 'Your name', value: state.yourName || '—' },
+      { label: 'Your email', value: state.yourEmail || '—' },
+      { label: 'Person', value: state.personName + (state.relationship ? ' (' + state.relationship + ')' : '') },
+      { label: 'Status', value: state.personStatus === 'Yes, they\'re still here' ? 'Still with me' : state.personStatus === 'No, they\'ve passed' ? 'Has passed' : '—' },
+      { label: 'Nicknames', value: state.nicknames || '—' },
+      { label: 'Languages', value: (state.languages || []).join(', ') || '—' },
+      { label: 'Time messaging', value: state.timespan || '—' },
+      { label: 'Key people', value: state.people || '—' },
+      { label: 'Hoping to find', value: state.hopingToFind || '—' },
+      { label: 'Skip / avoid', value: state.avoid || 'Nothing flagged' },
+    ];
+
+    const table = document.getElementById('review-table');
+    table.innerHTML = items.map(item => `
+      <div class="review-row">
+        <div class="review-label">${item.label}</div>
+        <div class="review-value">${item.value}</div>
+      </div>
+    `).join('');
+  }
+
+  // ── SUBMIT ──
+  async function submitForm() {
+    const btn = document.getElementById('btn-submit');
+    const errBox = document.getElementById('error-box');
+    btn.textContent = 'Submitting...';
+    btn.disabled = true;
+    errBox.style.display = 'none';
+
+    const payload = {
+      yourName: state.yourName,
+      yourEmail: state.yourEmail,
+      _replyto: state.yourEmail,
+      personName: state.personName,
+      relationship: state.relationship,
+      personStatus: state.personStatus === "Yes, they're still here" ? 'Still with me' : 'Has passed',
+      nicknames: state.nicknames || '—',
+      languages: (state.languages || []).join(', ') || '—',
+      timespan: state.timespan || '—',
+      keyPeople: state.people || '—',
+      hopingToFind: state.hopingToFind || '—',
+      avoid: state.avoid || 'Nothing flagged',
+      _subject: 'StillSaid intake: ' + state.personName + ' (' + state.relationship + ')',
+    };
+
+    try {
+      const res = await fetch('https://formspree.io/f/xaqlajkk', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (res.ok) {
+        document.getElementById('confirm-title').textContent = state.personName
+          ? 'Thank you, we\'ve got your answers about ' + state.personName + '.'
+          : 'Thank you.';
+        goTo('confirmation');
+      } else {
+        errBox.textContent = 'Something went wrong. Please try again.';
+        errBox.style.display = 'block';
+        btn.textContent = 'Submit my intake';
+        btn.disabled = false;
+      }
+    } catch(e) {
+      errBox.textContent = 'Could not connect. Please check your internet and try again.';
+      errBox.style.display = 'block';
+      btn.textContent = 'Submit my intake';
+      btn.disabled = false;
+    }
+  }
+
+  // ── INIT ──
+  renderDots('step1');
+</script>
+</body>
+</html>
