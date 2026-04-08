@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>StillSaid — Sample Keepsake</title>
+<meta name="description" content="A sample keepsake showing what StillSaid creates from years of messages between a mother and daughter.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300;1,8..60,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8XJDJZPSYP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8XJDJZPSYP');
+</script>
+<style>
+:root {
+  --bg: #faf9f7;
+  --card: #f4f3f0;
+  --card-border: #eae8e3;
+  --ink: #1a1917;
+  --ink-soft: #3d3b37;
+  --muted: #8a857d;
+  --faint: #c2bdb5;
+  --accent: #9a8e7f;
+  --gold: #b5894a;
+  --gold-light: #d4ac72;
+  --rule: #e4e1db;
+  --rule-light: #edebe6;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 17px; -webkit-text-size-adjust: 100%; }
+body {
+  background: #f3efe9;
+  color: var(--ink);
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-weight: 300;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+  height: 100svh;
+}
+
+.book {
+  height: 100svh;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+.page {
+  min-height: 100svh;
+  scroll-snap-align: start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  position: relative;
+}
+
+.page-inner {
+  max-width: 520px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Cover */
+.cover-inner {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.8rem;
+}
+
+.cover-inner h1 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(3.5rem, 12vw, 5.5rem);
+  font-weight: 300;
+  letter-spacing: 0.06em;
+  line-height: 1;
+}
+
+.cover-rule {
+  width: 28px;
+  height: 1px;
+  background: var(--faint);
+  opacity: 0.5;
+}
+
+.cover-sub {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(1rem, 3.5vw, 1.25rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+}
+
+.cover-span {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 300;
+  color: var(--faint);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* Opening note */
+.note-inner {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 2rem 0;
+}
+
+.note-text {
+  font-family: 'Source Serif 4', serif;
+  font-size: 0.88rem;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 2;
+  max-width: 400px;
+}
+
+.note-small {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 300;
+  color: var(--faint);
+  letter-spacing: 0.1em;
+  line-height: 2;
+}
+
+/* Card */
+.card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 6px;
+  padding: clamp(1.4rem, 5vw, 2rem);
+}
+
+/* Exchange (inside cards) */
+.exchange {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.line { display: block; padding: 0.12rem 0; }
+
+.line.mom {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: clamp(1rem, 3.5vw, 1.12rem);
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1.65;
+}
+
+.line.you {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: clamp(0.82rem, 2.6vw, 0.88rem);
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.6;
+  padding-left: 0.5rem;
+  border-left: 1.5px solid var(--rule);
+  margin: 0.15rem 0;
+}
+
+/* Card footer */
+.card-footer {
+  margin-top: 1rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--card-border);
+}
+
+.card-date {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 300;
+  color: var(--faint);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.card-note {
+  font-family: 'Source Serif 4', serif;
+  font-size: 0.8rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--muted);
+  line-height: 1.5;
+  margin-top: 0.4rem;
+}
+
+/* Open page — no card, phrases float on whitespace */
+.open-inner {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.open-phrase {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(1.3rem, 4.5vw, 1.7rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--ink);
+  line-height: 1.4;
+}
+
+.open-phrase-faded {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(1.1rem, 3.8vw, 1.4rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.open-meta {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 300;
+  color: var(--faint);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-top: 1.2rem;
+}
+
+/* Closing */
+.closing-inner {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.closing-rule {
+  width: 28px;
+  height: 1px;
+  background: var(--rule);
+  opacity: 0.6;
+}
+
+.closing-quote {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(1.8rem, 6vw, 2.5rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--ink);
+  letter-spacing: 0.02em;
+  line-height: 1.3;
+}
+
+.closing-meta {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 300;
+  color: var(--faint);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* End card */
+.end-inner {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.end-text {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(1.1rem, 4vw, 1.4rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  line-height: 1.5;
+}
+
+.end-cta {
+  display: inline-block;
+  font-family: 'Source Serif 4', serif;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--bg);
+  background: var(--ink);
+  padding: 14px 32px;
+  text-decoration: none;
+  border: 1px solid var(--ink);
+  transition: background 0.25s;
+}
+.end-cta:hover { background: var(--ink-soft); }
+
+.end-note {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 300;
+  color: var(--faint);
+  letter-spacing: 0.08em;
+  line-height: 1.8;
+  max-width: 360px;
+}
+
+.end-colophon {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.55rem;
+  font-weight: 300;
+  color: var(--faint);
+  letter-spacing: 0.08em;
+  line-height: 2;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule-light);
+}
+
+/* Page counter */
+.page-counter {
+  position: fixed;
+  bottom: 1.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 300;
+  color: var(--faint);
+  letter-spacing: 0.15em;
+  z-index: 50;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.nav-hint {
+  position: fixed;
+  bottom: 2.8rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.55rem;
+  font-weight: 300;
+  color: var(--faint);
+  letter-spacing: 0.1em;
+  z-index: 50;
+  opacity: 0;
+  transition: opacity 1s ease;
+  pointer-events: none;
+}
+.nav-hint.show { opacity: 0.6; }
+
+/* Banner — minimal, fades on scroll */
+.sample-banner {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(250,249,247,0.95);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--rule-light);
+  padding: 7px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: 'Inter', sans-serif;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.sample-banner.faded {
+  opacity: 0;
+  transform: translateY(-100%);
+  pointer-events: none;
+}
+
+.banner-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.banner-cta {
+  font-family: 'Source Serif 4', serif;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-decoration: none;
+  border-bottom: 1px solid var(--gold-light);
+  padding-bottom: 1px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.banner-cta:hover { color: var(--ink); border-color: var(--ink); }
+
+/* Desktop reader shell */
+@media (min-width: 1024px) {
+  .book {
+    max-width: 760px;
+    margin: 0 auto;
+    background: var(--bg);
+    box-shadow: 0 0 60px rgba(28,23,19,0.04), 0 0 1px var(--rule-light);
+  }
+
+  .page {
+    padding: 3rem 4rem;
+  }
+
+  .page-inner {
+    max-width: 620px;
+  }
+
+  .open-inner {
+    max-width: 680px;
+  }
+
+  .sample-banner {
+    max-width: 760px;
+    margin: 0 auto;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 0 0 4px 4px;
+  }
+
+  .sample-banner.faded {
+    transform: translateX(-50%) translateY(-100%);
+  }
+}
+
+/* Wider desktop — more breathing room around the shell */
+@media (min-width: 1400px) {
+  .book {
+    max-width: 800px;
+    border-radius: 2px;
+  }
+
+  .page-inner {
+    max-width: 660px;
+  }
+}
+
+@media print {
+  body { overflow: auto; height: auto; }
+  .book { height: auto; overflow: visible; scroll-snap-type: none; }
+  .page { min-height: auto; page-break-after: always; padding: 3rem 2rem; }
+  .page-counter, .nav-hint, .sample-banner { display: none !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="sample-banner" id="banner">
+  <a href="/index.html" class="banner-logo">StillSaid</a>
+  <a href="/intake.html" class="banner-cta">Start free intake</a>
+</div>
+
+<div class="page-counter" id="counter"></div>
+<div class="nav-hint" id="hint">scroll or ↑ ↓ to navigate</div>
+
+<div class="book" id="book">
+
+<!-- PAGE 1: COVER -->
+<div class="page" data-page="0">
+  <div class="page-inner cover-inner">
+    <h1>Mom</h1>
+    <div class="cover-rule"></div>
+    <p class="cover-sub">A mother, in messages</p>
+    <p class="cover-span">2016 – 2024</p>
+  </div>
+</div>
+
+<!-- PAGE 2: OPENING NOTE -->
+<div class="page" data-page="1">
+  <div class="page-inner note-inner">
+    <div class="cover-rule"></div>
+    <p class="note-text">
+      Not everything they said. Just the parts that stayed.
+    </p>
+    <p class="note-text">
+      Phrases, check-ins, jokes, and small moments — surfaced from years of ordinary messages between a mother and her daughter.
+    </p>
+    <div class="cover-rule"></div>
+    <p class="note-small">
+      This is a sample keepsake. It is composited from real<br>
+      patterns across multiple archives, not one person's thread.
+    </p>
+  </div>
+</div>
+
+<!-- PAGE 3: ORDINARY HUMOR (card — exchange) -->
+<div class="page" data-page="2">
+  <div class="page-inner">
+    <div class="card">
+      <div class="exchange">
+        <span class="line mom">Did u land</span>
+        <span class="line you">yeah just got off</span>
+        <span class="line mom">Ok good</span>
+        <span class="line mom">Dont forget ur jacket is in the front pocket</span>
+        <span class="line mom">The BIG pocket not the small one</span>
+        <span class="line you">there's only one pocket mom</span>
+        <span class="line mom">The BIG one</span>
+        <span class="line you">ok</span>
+        <span class="line mom">And the chutney is in the bag dont let it leak</span>
+        <span class="line you">you put chutney in my suitcase??</span>
+        <span class="line mom">Obv</span>
+      </div>
+      <footer class="card-footer">
+        <span class="card-date">Mar 2017</span>
+      </footer>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 4: RECURRING CHECK-IN (open — no card, floating phrases) -->
+<div class="page" data-page="3">
+  <div class="page-inner open-inner">
+    <p class="open-phrase">Did you eat?</p>
+    <p class="open-phrase">Have you eaten?</p>
+    <p class="open-phrase-faded">Eat something first</p>
+    <p class="open-phrase">Did you eat yet</p>
+    <p class="open-phrase-faded">Eat properly ok</p>
+    <p class="open-phrase">At least eat something</p>
+    <p class="open-meta">Recurring · Said across 28 conversations · 2016 – 2024</p>
+  </div>
+</div>
+
+<!-- PAGE 5: PRAISE (open — no card) -->
+<div class="page" data-page="4">
+  <div class="page-inner open-inner">
+    <p class="open-phrase">Beautiful pic</p>
+    <p class="open-phrase">Beautiful</p>
+    <p class="open-phrase-faded">So nice this one</p>
+    <p class="open-phrase">Beautiful both of u</p>
+    <p class="open-phrase-faded">Send more</p>
+    <p class="open-phrase">My beautiful girl</p>
+    <p class="open-meta">Recurring · Said across 19 conversations · 2016 – 2024</p>
+  </div>
+</div>
+
+<!-- PAGE 6: HER WORLD — her as a person (card — exchange) -->
+<div class="page" data-page="5">
+  <div class="page-inner">
+    <div class="card">
+      <div class="exchange">
+        <span class="line mom">I joined a walking group</span>
+        <span class="line you">wait what</span>
+        <span class="line mom">Tuesday thursday morning</span>
+        <span class="line mom">Rita and sunita also joined</span>
+        <span class="line mom">We did 4km today</span>
+        <span class="line you">mom that's amazing</span>
+        <span class="line mom">My legs are FINSIHED</span>
+        <span class="line mom">But i feel good</span>
+        <span class="line you">so proud of you</span>
+        <span class="line mom">Dont be dramatic its just walking</span>
+      </div>
+      <footer class="card-footer">
+        <span class="card-date">Sep 2022</span>
+        <span class="card-note">She meant "finished." The typo stays.</span>
+      </footer>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 7: EMOTIONAL TURNING POINT (card — exchange) -->
+<div class="page" data-page="6">
+  <div class="page-inner">
+    <div class="card">
+      <div class="exchange">
+        <span class="line you">so tired today</span>
+        <span class="line you">just lying down</span>
+        <span class="line mom">Its ok rest</span>
+        <span class="line mom">Dont worry about anything</span>
+        <span class="line mom">Are u going to tell me something</span>
+        <span class="line you">lol maybe</span>
+        <span class="line mom">I KNEW IT</span>
+        <span class="line mom">Im so happy for u both</span>
+        <span class="line mom">Im going to be a NANI</span>
+        <span class="line mom">I cant stop smileing</span>
+        <span class="line you">mom we haven't told anyone yet</span>
+        <span class="line mom">Ok ok i wont say</span>
+        <span class="line mom">But im smileing</span>
+      </div>
+      <footer class="card-footer">
+        <span class="card-date">Jan 2021</span>
+        <span class="card-note">She figured it out before being told.</span>
+      </footer>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 8: PRACTICAL LOVE (card — exchange) -->
+<div class="page" data-page="7">
+  <div class="page-inner">
+    <div class="card">
+      <div class="exchange">
+        <span class="line you">the dal came out weird</span>
+        <span class="line mom">How much water</span>
+        <span class="line you">idk like 2 cups?</span>
+        <span class="line mom">Too much</span>
+        <span class="line mom">1 cup only</span>
+        <span class="line mom">And did u put hing</span>
+        <span class="line you">what is hing</span>
+        <span class="line mom">Asafoetida</span>
+        <span class="line mom">Small pinch only</span>
+        <span class="line mom">U never watched me cook and now u r asking on phone</span>
+        <span class="line you">lol ok sorry</span>
+        <span class="line mom">Its ok next time it will be perfect</span>
+        <span class="line mom">Send pic when done</span>
+      </div>
+      <footer class="card-footer">
+        <span class="card-date">Nov 2019</span>
+      </footer>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 9: CLOSE — sign-off (open — breathing room) -->
+<div class="page" data-page="8">
+  <div class="page-inner closing-inner">
+    <div class="closing-rule"></div>
+    <div class="closing-quote">Ok goodnight<br>Love you both</div>
+    <div class="closing-meta">How she signed off — the same way, every time</div>
+    <div class="closing-rule"></div>
+  </div>
+</div>
+
+<!-- PAGE 10: END CARD -->
+<div class="page" data-page="9">
+  <div class="page-inner end-inner">
+    <p class="end-text">A keepsake built from the words<br>that were already there.</p>
+    <div class="cover-rule"></div>
+    <a href="/intake.html" class="end-cta">Get yours</a>
+    <div class="end-colophon">
+      This sample is composited from real patterns across multiple archives.<br>
+      Your keepsake would be built from your actual messages, exactly as written.
+    </div>
+  </div>
+</div>
+
+</div><!-- /book -->
+
+<script>
+const book = document.getElementById('book');
+const counter = document.getElementById('counter');
+const hint = document.getElementById('hint');
+const banner = document.getElementById('banner');
+const pages = document.querySelectorAll('.page');
+const total = pages.length;
+
+// Show nav hint briefly
+setTimeout(() => hint.classList.add('show'), 1500);
+setTimeout(() => hint.classList.remove('show'), 5000);
+
+// Update counter + fade banner on scroll
+function onScroll() {
+  const scrollTop = book.scrollTop;
+  const pageHeight = window.innerHeight;
+  const current = Math.round(scrollTop / pageHeight);
+
+  // Counter
+  counter.textContent = (current + 1) + ' / ' + total;
+  counter.style.opacity = (current === 0 || current === total - 1) ? '0' : '1';
+
+  // Fade banner after first page
+  if (current >= 2) {
+    banner.classList.add('faded');
+  } else {
+    banner.classList.remove('faded');
+  }
+}
+
+book.addEventListener('scroll', onScroll);
+onScroll();
+
+// Keyboard navigation
+document.addEventListener('keydown', (e) => {
+  const scrollTop = book.scrollTop;
+  const pageHeight = window.innerHeight;
+  const current = Math.round(scrollTop / pageHeight);
+
+  if (e.key === 'ArrowDown' || e.key === ' ') {
+    e.preventDefault();
+    if (current < total - 1) pages[current + 1].scrollIntoView({ behavior: 'smooth' });
+  }
+  if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    if (current > 0) pages[current - 1].scrollIntoView({ behavior: 'smooth' });
+  }
+});
+</script>
+
+</body>
+</html>
