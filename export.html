@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Export Your WhatsApp Chat — StillSaid</title>
+<meta name="description" content="A quick visual guide to exporting your WhatsApp conversation and sending it to StillSaid.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8XJDJZPSYP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8XJDJZPSYP');
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f7f3ee;
+    --parchment: #efe9df;
+    --ink: #1c1713;
+    --ink-soft: #3d3530;
+    --ink-muted: #7a6f67;
+    --gold: #b5894a;
+    --gold-light: #d4ac72;
+    --divider: #ddd5c9;
+    --card-bg: #faf7f3;
+    --card-border: #e4dcd3;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background-color: var(--cream);
+    color: var(--ink);
+    font-size: 18px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 48px;
+    background: rgba(247,243,238,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--divider);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-cta {
+    font-family: 'Source Serif 4', serif;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px solid var(--gold-light);
+    padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .nav-cta:hover { color: var(--ink); border-color: var(--ink); }
+
+  /* ─── LAYOUT ─── */
+  .page-header {
+    text-align: center;
+    padding: 140px 32px 60px;
+  }
+  .page-header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 4.5vw, 48px);
+    font-weight: 400;
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+  .page-header p {
+    font-size: 17px;
+    font-weight: 300;
+    color: var(--ink-soft);
+    max-width: 520px;
+    margin: 0 auto;
+    line-height: 1.65;
+  }
+
+  .steps {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 32px 100px;
+  }
+
+  .step {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 52px;
+    align-items: center;
+    margin-bottom: 80px;
+  }
+  .step:last-child { margin-bottom: 0; }
+
+  .step-text { order: 2; }
+  .step-visual { order: 1; }
+
+  .step-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 300;
+    color: var(--gold-light);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+  .step-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 10px;
+    line-height: 1.25;
+  }
+  .step-desc {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--ink-soft);
+    line-height: 1.7;
+  }
+  .step-desc strong {
+    font-weight: 400;
+    color: var(--ink);
+  }
+  .step-hint {
+    font-size: 14px;
+    font-style: italic;
+    color: var(--ink-muted);
+    margin-top: 10px;
+    line-height: 1.6;
+  }
+
+  /* ─── PHONE MOCKUP ─── */
+  .phone {
+    width: 200px;
+    margin: 0 auto;
+    background: #1a1a1e;
+    border-radius: 30px;
+    padding: 10px;
+    box-shadow: 0 8px 40px rgba(28,23,19,0.18), 0 2px 8px rgba(0,0,0,0.1);
+  }
+  .phone-screen {
+    background: #f2f2f7;
+    border-radius: 22px;
+    overflow: hidden;
+  }
+  .phone-dark .phone-screen {
+    background: #000;
+  }
+
+  /* iOS status bar */
+  .ios-status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 16px 2px;
+    font-family: -apple-system, 'SF Pro', sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+  }
+  .ios-status-light { color: #000; background: #f2f2f7; }
+  .ios-status-dark { color: #fff; background: #000; }
+  .ios-status-right { display: flex; gap: 3px; align-items: center; }
+
+  /* iOS nav bar */
+  .ios-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 12px 8px;
+    font-family: -apple-system, sans-serif;
+  }
+  .ios-nav-light { background: #f2f2f7; }
+  .ios-nav-back {
+    color: #007aff;
+    font-size: 10px;
+  }
+  .ios-nav-title {
+    font-size: 11px;
+    font-weight: 600;
+    color: #000;
+  }
+  .ios-nav-action {
+    font-size: 10px;
+    color: #007aff;
+  }
+
+  /* WhatsApp contact info list */
+  .wa-list {
+    background: #fff;
+    font-family: -apple-system, sans-serif;
+  }
+  .wa-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 14px;
+    font-size: 9px;
+    color: #000;
+    border-bottom: 0.5px solid #e5e5ea;
+  }
+  .wa-list-item:last-child { border-bottom: none; }
+  .wa-list-item .left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .wa-list-item .icon {
+    width: 16px;
+    text-align: center;
+    font-size: 9px;
+    color: #8e8e93;
+  }
+  .wa-list-item .chevron {
+    color: #c7c7cc;
+    font-size: 8px;
+  }
+  .wa-list-item .detail {
+    color: #8e8e93;
+    font-size: 9px;
+  }
+  .wa-list-section {
+    background: #f2f2f7;
+    height: 8px;
+  }
+
+  /* Green/red action links */
+  .wa-action-green {
+    color: #25d366;
+    font-size: 9px;
+    padding: 7px 14px;
+    border-bottom: 0.5px solid #e5e5ea;
+    font-family: -apple-system, sans-serif;
+  }
+  .wa-action-red {
+    color: #ff3b30;
+    font-size: 9px;
+    padding: 7px 14px;
+    border-bottom: 0.5px solid #e5e5ea;
+    font-family: -apple-system, sans-serif;
+  }
+  .wa-action-green.highlight {
+    background: rgba(37,211,102,0.1);
+    font-weight: 600;
+    position: relative;
+  }
+
+  /* Annotation pointer */
+  .annotation-arrow {
+    position: absolute;
+    right: -4px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    border-right: 5px solid #b5894a;
+  }
+
+  /* Export chat bottom sheet */
+  .export-sheet {
+    background: #f2f2f7;
+    border-radius: 10px 10px 0 0;
+    padding: 10px 0 0;
+  }
+  .export-sheet-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 14px 10px;
+    font-family: -apple-system, sans-serif;
+  }
+  .export-sheet-title {
+    font-size: 11px;
+    font-weight: 600;
+    color: #000;
+  }
+  .export-sheet-close {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #e5e5ea;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    color: #8e8e93;
+  }
+  .export-sheet-note {
+    font-family: -apple-system, sans-serif;
+    font-size: 8px;
+    color: #8e8e93;
+    background: #fff;
+    padding: 7px 14px;
+    border-radius: 8px;
+    margin: 0 10px 8px;
+  }
+  .export-sheet-option {
+    font-family: -apple-system, sans-serif;
+    font-size: 9px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 9px 14px;
+    background: #fff;
+    border-bottom: 0.5px solid #e5e5ea;
+  }
+  .export-sheet-option:first-of-type {
+    border-radius: 8px 8px 0 0;
+    margin: 0 10px 0;
+  }
+  .export-sheet-option:last-of-type {
+    border-radius: 0 0 8px 8px;
+    border-bottom: none;
+    margin: 0 10px 10px;
+  }
+  .export-sheet-option .opt-icon {
+    color: #8e8e93;
+    font-size: 10px;
+  }
+  .export-sheet-option.selected {
+    background: rgba(37,211,102,0.08);
+    font-weight: 500;
+    color: #25d366;
+  }
+
+  /* iOS share sheet */
+  .share-sheet {
+    background: #f2f2f7;
+    border-radius: 10px 10px 0 0;
+    padding: 10px 0 0;
+  }
+  .share-file-preview {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    margin: 0 10px 10px;
+    background: #fff;
+    border-radius: 8px;
+  }
+  .share-file-icon {
+    width: 28px;
+    height: 32px;
+    background: #f2f2f7;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: -apple-system, sans-serif;
+    font-size: 6px;
+    color: #8e8e93;
+    border: 0.5px solid #e5e5ea;
+  }
+  .share-file-name {
+    font-family: -apple-system, sans-serif;
+    font-size: 9px;
+    font-weight: 500;
+    color: #000;
+  }
+  .share-file-detail {
+    font-family: -apple-system, sans-serif;
+    font-size: 7px;
+    color: #8e8e93;
+  }
+  .share-app-row {
+    display: flex;
+    gap: 10px;
+    padding: 0 14px 10px;
+    justify-content: center;
+  }
+  .share-app {
+    text-align: center;
+    width: 38px;
+  }
+  .share-app-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    margin: 0 auto 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+  }
+  .share-app-label {
+    font-family: -apple-system, sans-serif;
+    font-size: 6px;
+    color: #8e8e93;
+  }
+  .share-app.active .share-app-icon {
+    box-shadow: 0 0 0 2px #007aff;
+  }
+  .share-app.active .share-app-label {
+    color: #007aff;
+    font-weight: 500;
+  }
+
+  /* Mail compose */
+  .mail-compose {
+    background: #fff;
+    font-family: -apple-system, sans-serif;
+  }
+  .mail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+  }
+  .mail-cancel {
+    font-size: 10px;
+    color: #007aff;
+  }
+  .mail-title {
+    font-size: 11px;
+    font-weight: 600;
+    color: #000;
+  }
+  .mail-send-btn {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #007aff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 10px;
+  }
+  .mail-field {
+    display: flex;
+    align-items: center;
+    padding: 7px 12px;
+    border-bottom: 0.5px solid #e5e5ea;
+    font-size: 9px;
+  }
+  .mail-field-label {
+    color: #8e8e93;
+    min-width: 32px;
+  }
+  .mail-field-value {
+    color: #000;
+    font-weight: 400;
+  }
+  .mail-field-value.email {
+    color: #007aff;
+  }
+  .mail-attachment {
+    margin: 12px;
+    padding: 8px 10px;
+    background: #f2f2f7;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .mail-attachment-icon {
+    width: 24px;
+    height: 28px;
+    background: #fff;
+    border: 0.5px solid #e5e5ea;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5px;
+    color: #8e8e93;
+  }
+  .mail-attachment-name {
+    font-size: 8px;
+    color: #000;
+  }
+  .mail-attachment-size {
+    font-size: 7px;
+    color: #8e8e93;
+  }
+
+  /* Dimmed overlay for bottom sheets */
+  .dimmed-bg {
+    background: rgba(0,0,0,0.3);
+    padding: 8px 0 0;
+  }
+  .dimmed-content {
+    font-family: -apple-system, sans-serif;
+    font-size: 9px;
+    color: rgba(255,255,255,0.4);
+    padding: 4px 14px;
+  }
+
+  /* ─── BOTTOM NOTE ─── */
+  .bottom-note {
+    text-align: center;
+    padding: 40px 32px 80px;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+  .bottom-note-line {
+    width: 40px;
+    height: 1px;
+    background: var(--divider);
+    margin: 0 auto 24px;
+  }
+  .bottom-note p {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--ink-muted);
+    line-height: 1.7;
+    margin-bottom: 8px;
+  }
+  .bottom-note a {
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px solid var(--gold-light);
+    padding-bottom: 1px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .bottom-note a:hover {
+    color: var(--ink);
+    border-color: var(--ink);
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 640px) {
+    nav { padding: 16px 24px; }
+    .page-header { padding: 120px 24px 48px; }
+    .steps { padding: 0 24px 80px; }
+    .step {
+      grid-template-columns: 1fr;
+      gap: 28px;
+      margin-bottom: 56px;
+    }
+    .step-visual { order: 1; }
+    .step-text { order: 2; text-align: center; }
+    .step-number { font-size: 40px; }
+    .step-title { font-size: 21px; }
+    .phone { width: 180px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">StillSaid</a>
+  <a href="/intake.html" class="nav-cta">Start your intake</a>
+</nav>
+
+<!-- HEADER -->
+<div class="page-header">
+  <h1>How to send us your messages</h1>
+  <p>It takes about two minutes on your phone. Here's what each step looks like.</p>
+</div>
+
+<!-- STEPS -->
+<div class="steps">
+
+  <!-- ═══ STEP 1: Open contact info ═══ -->
+  <div class="step">
+    <div class="step-visual">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="ios-status ios-status-light">
+            <span>10:56</span>
+            <div class="ios-status-right">
+              <span>&#9679;&#9679;&#9679;</span>
+            </div>
+          </div>
+          <div class="ios-nav ios-nav-light">
+            <span class="ios-nav-back">&#8249;</span>
+            <span class="ios-nav-title">Contact info</span>
+            <span class="ios-nav-action">Edit</span>
+          </div>
+          <!-- Avatar area -->
+          <div style="text-align: center; padding: 8px 0 6px; background: #f2f2f7;">
+            <div style="width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, #c8b8a8, #a89888); margin: 0 auto 5px;"></div>
+            <div style="font-family: -apple-system, sans-serif; font-size: 12px; font-weight: 600; color: #000;">Dad</div>
+            <div style="font-family: -apple-system, sans-serif; font-size: 7px; color: #8e8e93;">+1 (555) 012-3456</div>
+          </div>
+          <!-- Action buttons row -->
+          <div style="display: flex; justify-content: center; gap: 8px; padding: 6px 12px 8px; background: #f2f2f7;">
+            <div style="flex: 1; text-align: center; background: #fff; border-radius: 6px; padding: 5px 0;">
+              <div style="color: #25d366; font-size: 10px;">&#9742;</div>
+              <div style="font-family: -apple-system, sans-serif; font-size: 6px; color: #000;">Audio</div>
+            </div>
+            <div style="flex: 1; text-align: center; background: #fff; border-radius: 6px; padding: 5px 0;">
+              <div style="color: #25d366; font-size: 10px;">&#9724;</div>
+              <div style="font-family: -apple-system, sans-serif; font-size: 6px; color: #000;">Video</div>
+            </div>
+            <div style="flex: 1; text-align: center; background: #fff; border-radius: 6px; padding: 5px 0;">
+              <div style="color: #25d366; font-size: 10px;">&#8981;</div>
+              <div style="font-family: -apple-system, sans-serif; font-size: 6px; color: #000;">Search</div>
+            </div>
+          </div>
+          <!-- Settings list -->
+          <div class="wa-list-section"></div>
+          <div class="wa-list">
+            <div class="wa-list-item">
+              <div class="left"><span class="icon">&#128444;</span> Media, links and docs</div>
+              <div><span class="detail">4,585</span> <span class="chevron">&#8250;</span></div>
+            </div>
+            <div class="wa-list-item">
+              <div class="left"><span class="icon">&#9734;</span> Starred</div>
+              <div><span class="detail">41</span> <span class="chevron">&#8250;</span></div>
+            </div>
+          </div>
+          <div class="wa-list-section"></div>
+          <div class="wa-list">
+            <div class="wa-list-item">
+              <div class="left"><span class="icon">&#128276;</span> Notifications</div>
+              <div><span class="chevron">&#8250;</span></div>
+            </div>
+            <div class="wa-list-item">
+              <div class="left"><span class="icon">&#128172;</span> Chat theme</div>
+              <div><span class="chevron">&#8250;</span></div>
+            </div>
+          </div>
+          <!-- Scroll indicator -->
+          <div style="text-align: center; padding: 6px 0 4px; background: #f2f2f7;">
+            <div style="font-family: -apple-system, sans-serif; font-size: 7px; color: #b5894a; font-style: italic;">scroll down ↓</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="step-text">
+      <div class="step-number">1</div>
+      <div class="step-title">Tap their name at the top</div>
+      <div class="step-desc">
+        Open the conversation in WhatsApp, then tap the person's name at the very top of the screen. This opens the Contact info page you see here.
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ STEP 2: Scroll down to Export chat ═══ -->
+  <div class="step">
+    <div class="step-visual">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="ios-status ios-status-light">
+            <span>10:56</span>
+            <div class="ios-status-right">
+              <span>&#9679;&#9679;&#9679;</span>
+            </div>
+          </div>
+          <div class="ios-nav ios-nav-light">
+            <span class="ios-nav-back">&#8249;</span>
+            <span class="ios-nav-title">Dad</span>
+            <span class="ios-nav-action">Edit</span>
+          </div>
+          <!-- Bottom of contact info page -->
+          <div class="wa-list">
+            <div class="wa-list-item">
+              <div class="left"><span class="icon">&#128100;</span> Contact details</div>
+              <div><span class="chevron">&#8250;</span></div>
+            </div>
+          </div>
+          <div class="wa-list-section"></div>
+          <div style="font-family: -apple-system, sans-serif; font-size: 9px; font-weight: 600; color: #000; padding: 8px 14px 4px; background: #f2f2f7;">
+            Groups in common
+          </div>
+          <div class="wa-list">
+            <div class="wa-list-item">
+              <div class="left">
+                <div style="width: 18px; height: 18px; border-radius: 50%; background: #c8d8c0;"></div>
+                <span>Family Group</span>
+              </div>
+              <div><span class="chevron">&#8250;</span></div>
+            </div>
+          </div>
+          <div class="wa-list-section"></div>
+          <!-- Action links -->
+          <div class="wa-list" style="background: #fff;">
+            <div class="wa-action-green">Share contact</div>
+            <div class="wa-action-green">Add to Favorites</div>
+            <div class="wa-action-green">Add to list</div>
+            <div class="wa-action-green highlight" style="position: relative;">
+              Export chat
+              <div class="annotation-arrow"></div>
+            </div>
+          </div>
+          <div class="wa-list-section"></div>
+          <div class="wa-list" style="background: #fff;">
+            <div class="wa-action-red">Clear chat</div>
+            <div class="wa-action-red">Block</div>
+            <div class="wa-action-red" style="border-bottom: none;">Report</div>
+          </div>
+          <div class="wa-list-section"></div>
+        </div>
+      </div>
+    </div>
+    <div class="step-text">
+      <div class="step-number">2</div>
+      <div class="step-title">Scroll all the way down</div>
+      <div class="step-desc">
+        Keep scrolling past the settings — past Notifications, Chat theme, Disappearing messages, Encryption, Contact details, and Groups. Near the very bottom, you'll see <strong>Export chat</strong> in green. Tap it.
+      </div>
+      <div class="step-hint">
+        It's easy to miss — it's tucked between "Add to list" and "Clear chat."
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ STEP 3: Choose "Without media" ═══ -->
+  <div class="step">
+    <div class="step-visual">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="ios-status ios-status-light">
+            <span>10:56</span>
+            <div class="ios-status-right">
+              <span>&#9679;&#9679;&#9679;</span>
+            </div>
+          </div>
+          <!-- Dimmed background -->
+          <div class="dimmed-bg" style="min-height: 60px;">
+            <div class="dimmed-content">Contact details</div>
+            <div class="dimmed-content">Groups in common</div>
+          </div>
+          <!-- Bottom sheet -->
+          <div class="export-sheet">
+            <div class="export-sheet-header">
+              <span class="export-sheet-title">Export chat</span>
+              <div class="export-sheet-close">&#10005;</div>
+            </div>
+            <div class="export-sheet-note">
+              Attaching media will generate a larger chat archive.
+            </div>
+            <div class="export-sheet-option" style="border-radius: 8px 8px 0 0; margin: 0 10px 0; color: #000;">
+              <span>Attach media</span>
+              <span class="opt-icon">&#128444;</span>
+            </div>
+            <div class="export-sheet-option selected" style="border-radius: 0 0 8px 8px; margin: 0 10px 10px;">
+              <span>Without media &#10003;</span>
+              <span class="opt-icon" style="color: #25d366;">&#128196;</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="step-text">
+      <div class="step-number">3</div>
+      <div class="step-title">Choose "Without media"</div>
+      <div class="step-desc">
+        A small menu slides up asking if you want to include photos and videos. Choose <strong>Without media</strong> — we only need the text messages. This keeps the file small and fast to send.
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ STEP 4: Share sheet — tap Mail ═══ -->
+  <div class="step">
+    <div class="step-visual">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="ios-status ios-status-light">
+            <span>10:57</span>
+            <div class="ios-status-right">
+              <span>&#9679;&#9679;&#9679;</span>
+            </div>
+          </div>
+          <!-- Dimmed background -->
+          <div class="dimmed-bg" style="min-height: 30px;">
+          </div>
+          <!-- Share sheet -->
+          <div class="share-sheet">
+            <!-- File preview -->
+            <div class="share-file-preview">
+              <div class="share-file-icon">ZIP</div>
+              <div>
+                <div class="share-file-name">WhatsApp Chat - Dad</div>
+                <div class="share-file-detail">ZIP Archive &middot; 1 MB</div>
+              </div>
+            </div>
+            <!-- App icons row -->
+            <div style="font-family: -apple-system, sans-serif; font-size: 7px; color: #8e8e93; padding: 0 14px 6px;">Share with</div>
+            <div class="share-app-row">
+              <div class="share-app">
+                <div class="share-app-icon" style="background: #007aff;">
+                  <span style="font-size: 15px; color: #fff;">&#9729;</span>
+                </div>
+                <div class="share-app-label">AirDrop</div>
+              </div>
+              <div class="share-app">
+                <div class="share-app-icon" style="background: #34c759;">
+                  <span style="font-size: 13px; color: #fff;">&#9993;</span>
+                </div>
+                <div class="share-app-label">Messages</div>
+              </div>
+              <div class="share-app active">
+                <div class="share-app-icon" style="background: linear-gradient(180deg, #5ac8fa, #007aff);">
+                  <span style="font-size: 13px; color: #fff;">&#9993;</span>
+                </div>
+                <div class="share-app-label">Mail</div>
+              </div>
+              <div class="share-app">
+                <div class="share-app-icon" style="background: #25d366;">
+                  <span style="font-size: 13px; color: #fff;">&#9742;</span>
+                </div>
+                <div class="share-app-label">WhatsApp</div>
+              </div>
+            </div>
+            <!-- Bottom actions -->
+            <div style="display: flex; gap: 10px; padding: 6px 14px 10px; justify-content: center;">
+              <div class="share-app">
+                <div class="share-app-icon" style="background: #e5e5ea;">
+                  <span style="font-size: 11px; color: #8e8e93;">&#128203;</span>
+                </div>
+                <div class="share-app-label">Copy</div>
+              </div>
+              <div class="share-app">
+                <div class="share-app-icon" style="background: #e5e5ea;">
+                  <span style="font-size: 11px; color: #8e8e93;">&#128193;</span>
+                </div>
+                <div class="share-app-label">Save to Files</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="step-text">
+      <div class="step-number">4</div>
+      <div class="step-title">Tap "Mail"</div>
+      <div class="step-desc">
+        The iPhone share sheet will pop up showing the exported file. You'll see a row of apps — tap <strong>Mail</strong>. This opens a new email with the chat file already attached.
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ STEP 5: Fill in email and send ═══ -->
+  <div class="step">
+    <div class="step-visual">
+      <div class="phone phone-dark">
+        <div class="phone-screen" style="background: #fff;">
+          <div class="ios-status ios-status-light" style="background: #fff;">
+            <span>10:57</span>
+            <div class="ios-status-right">
+              <span>&#9679;&#9679;&#9679;</span>
+            </div>
+          </div>
+          <!-- Mail compose -->
+          <div class="mail-compose">
+            <div class="mail-header">
+              <span class="mail-cancel">Cancel</span>
+              <span class="mail-title">New Message</span>
+              <div class="mail-send-btn">&#8593;</div>
+            </div>
+            <div class="mail-field">
+              <span class="mail-field-label">To:</span>
+              <span class="mail-field-value email">stillsaid@proton.me</span>
+            </div>
+            <div class="mail-field">
+              <span class="mail-field-label">Subj:</span>
+              <span class="mail-field-value">Your name</span>
+            </div>
+            <div class="mail-field" style="border-bottom: none; color: #8e8e93; font-family: -apple-system, sans-serif; font-size: 8px; padding: 5px 12px;">
+              From: your.email@gmail.com
+            </div>
+            <!-- Attachment -->
+            <div class="mail-attachment">
+              <div class="mail-attachment-icon">ZIP</div>
+              <div>
+                <div class="mail-attachment-name">WhatsApp Chat.zip</div>
+                <div class="mail-attachment-size">1 MB</div>
+              </div>
+            </div>
+            <!-- Spacer -->
+            <div style="height: 80px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="step-text">
+      <div class="step-number">5</div>
+      <div class="step-title">Send it to us</div>
+      <div class="step-desc">
+        In the <strong>To</strong> field, type <strong>stillsaid@proton.me</strong>. For the subject line, just your name is fine. Then hit send. The chat file is already attached — you're done.
+      </div>
+      <div class="step-hint">
+        The file goes directly into an encrypted inbox that only we can access. We delete it as soon as your keepsake is ready.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- BOTTOM NOTE -->
+<div class="bottom-note">
+  <div class="bottom-note-line"></div>
+  <p>One small thing: please send from the same email address you used on the intake form — it helps us match everything up.</p>
+  <p>Your archive is processed privately. Nothing is stored after your keepsake is generated. We never train on your data.</p>
+  <p style="margin-top: 20px;"><a href="/">Back to StillSaid</a></p>
+</div>
+
+</body>
+</html>
